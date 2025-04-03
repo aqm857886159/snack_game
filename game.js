@@ -555,6 +555,54 @@ function updateGameStats() {
     `;
 }
 
+// 添加触摸控制
+function initTouchControls() {
+    const dpadButtons = document.querySelectorAll('.dpad > div[data-direction]');
+    
+    dpadButtons.forEach(button => {
+        // 触摸开始事件
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const direction = button.dataset.direction;
+            handleDirectionChange(direction);
+        });
+        
+        // 鼠标点击事件（用于测试）
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const direction = button.dataset.direction;
+            handleDirectionChange(direction);
+        });
+    });
+    
+    // 防止触摸事件导致页面滚动
+    document.addEventListener('touchmove', (e) => {
+        if (e.target.closest('.dpad')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+// 处理方向改变
+function handleDirectionChange(direction) {
+    if (gameState.isGameOver) return;
+    
+    switch (direction) {
+        case 'up':
+            if (gameState.direction !== 'down') gameState.nextDirection = 'up';
+            break;
+        case 'down':
+            if (gameState.direction !== 'up') gameState.nextDirection = 'down';
+            break;
+        case 'left':
+            if (gameState.direction !== 'right') gameState.nextDirection = 'left';
+            break;
+        case 'right':
+            if (gameState.direction !== 'left') gameState.nextDirection = 'right';
+            break;
+    }
+}
+
 // 事件监听
 document.addEventListener('keydown', (e) => {
     if (gameState.isGameOver) return;
@@ -636,5 +684,6 @@ createSkinSelector();
 // 初始化游戏
 initCanvas();
 initGame();
+initTouchControls();
 updateLeaderboard();
 updateGameStats(); 

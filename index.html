@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>优雅贪吃蛇</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -26,6 +26,17 @@
                 <button id="startBtn" class="btn primary">开始游戏</button>
                 <button id="restartBtn" class="btn secondary">重新开始</button>
             </div>
+            
+            <!-- 添加虚拟方向键 -->
+            <div class="virtual-controls">
+                <div class="dpad">
+                    <div class="dpad-up" data-direction="up">↑</div>
+                    <div class="dpad-left" data-direction="left">←</div>
+                    <div class="dpad-center"></div>
+                    <div class="dpad-right" data-direction="right">→</div>
+                    <div class="dpad-down" data-direction="down">↓</div>
+                </div>
+            </div>
         </div>
         
         <div class="game-info">
@@ -43,7 +54,7 @@
     <!-- 底部区域 -->
     <footer class="footer">
         <div class="footer-content">
-            <p>使用方向键或 WASD 控制蛇的移动</p>
+            <p>使用方向键或虚拟按键控制蛇的移动</p>
             <p>© 2024 优雅贪吃蛇 - 一个优雅的贪吃蛇游戏</p>
         </div>
     </footer>
